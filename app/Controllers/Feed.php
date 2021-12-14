@@ -8,12 +8,18 @@ use App\Models\FeedModel;
 
 class Feed extends BaseController
 {
+
+    /**
+     * fungsi strip_tags() digunakan untuk mencegah html injection
+     */
+
     public function index()
     {
         $feed = new FeedModel();
         $like_post = $feed->getLikedPostByCurrentUser();
         $data['feed'] = $feed->getAllFeed();
         $data['post_id'] = array();
+        $data['comment'] = $feed->getAllComment();
         foreach($like_post as $key => $value){
             array_push($data['post_id'],$value['post_id']);
         }
@@ -28,6 +34,18 @@ class Feed extends BaseController
             'userid' => session()->get('userid')
         ); 
         $feed->storeLike($data_like);
+        return redirect()->to(base_url('feed'));
+    }
+
+    public function storeComment()
+    {
+        $feed = new FeedModel();
+        $data_comment = array(
+            'post_id' => $this->request->getPost('post_id'),
+            'userid' => session()->get('userid'),
+            'comment' => strip_tags($this->request->getPost('comment'))
+        );
+        $feed->storeComment($data_comment);
         return redirect()->to(base_url('feed'));
     }
 

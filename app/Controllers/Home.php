@@ -5,7 +5,11 @@ namespace App\Controllers;
 use App\Models\UserModel;
 
 class Home extends BaseController
-{    
+{
+    
+    /**
+     * fungsi strip_tags() digunakan untuk mencegah html injection
+     */
 
     public function login()
     {

@@ -41,6 +41,7 @@ $routes->get('feed','Feed::index');
 $routes->post('feed','Feed::storePost');
 $routes->post('likes','Feed::storeLike');
 $routes->post('unlike','Feed::removeLike');
+$routes->post('comments','Feed::storeComment');
 
 /*
  * --------------------------------------------------------------------

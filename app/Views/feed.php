@@ -117,47 +117,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <button type="submit" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
                 </form>
                 <?php } ?>
-                <span class="float-right text-muted">127 likes - 3 comments</span>
               </div>
               <div class="card-footer card-comments">
-                <div class="card-comment">
-                  <!-- User image -->
-                  <!-- <img class="img-circle img-sm" src="<?php echo base_url()?>/template/dist/img/user3-128x128.jpg" alt="User Image"> -->
-
-                  <div class="comment-text">
-                    <span class="username">
-                      Maria Gonzales
-                      <span class="text-muted float-right">8:03 PM Today</span>
-                    </span><!-- /.username -->
-                    It is a long established fact that a reader will be distracted
-                    by the readable content of a page when looking at its layout.
-                  </div>
-                  <!-- /.comment-text -->
-                </div>
-                <!-- /.card-comment -->
-                <div class="card-comment">
-                  <!-- User image -->
-                  <!-- <img class="img-circle img-sm" src="<?php echo base_url()?>/template/dist/img/user4-128x128.jpg" alt="User Image"> -->
-
-                  <div class="comment-text">
-                    <span class="username">
-                      Luna Stark
-                      <span class="text-muted float-right">8:03 PM Today</span>
-                    </span><!-- /.username -->
-                    It is a long established fact that a reader will be distracted
-                    by the readable content of a page when looking at its layout.
-                  </div>
-                  <!-- /.comment-text -->
-                </div>
-                <!-- /.card-comment -->
+                <?php foreach($comment as $key2 => $value2 ) { ?>
+                    <?php if($value['id'] == $value2['post_id']) { ?>
+                      <div class="card-comment">
+                        <div class="comment-text">
+                            <span class="username">
+                              <?php echo $value2['first_name']." ".$value2['last_name']?>
+                              <span class="text-muted float-right"><?php echo $value2['created_at']?></span>
+                            </span><!-- /.username -->
+                            <?php echo $value2['comment']?>.
+                        </div>
+                        <!-- /.comment-text -->  
+                      </div>
+                  <?php } ?>
+                <?php } ?>
               </div>
               <!-- /.card-footer -->
               <div class="card-footer">
-                <form action="#" method="post">
-                  <!-- <img class="img-fluid img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text"> -->
-                  <!-- .img-push is used to add margin to elements next to floating images -->
+                <form action="<?php echo base_url('comments')?>" method="post">
                   <div class="img-push">
-                    <input type="text" class="form-control form-control-sm" placeholder="Press enter to post comment">
+                    <input type="hidden" name="post_id" id="post-id-comment" value="<?php echo $value['id']?>">
+                    <input type="text" name="comment" class="form-control form-control-sm" placeholder="Enter your comment here">
+                    <br>
+                    <button type="submit" id="btn-submit-comment" class="btn btn-sm btn-primary float-right">Post Comment</button>
                   </div>
                 </form>
               </div>
@@ -193,5 +177,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="<?php echo base_url()?>/template/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url()?>/template/dist/js/demo.js"></script>
+
 </body>
 </html>

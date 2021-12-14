@@ -18,9 +18,21 @@ class FeedModel extends Model
         return $query->getResult('array');
     }
 
+    public function getAllComment()
+    {
+        $sql = "SELECT * FROM view_comment";
+        $query =  $this->db->query($sql);
+        return $query->getResult('array');
+    }
+
     public function storeLike($data)
     {
         return $this->db->table('likes')->insert($data);
+    }
+
+    public function storeComment($data)
+    {
+        return $this->db->table('comments')->insert($data);
     }
 
     public function removeLike($userid,$post_id)
