@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Top Navigation</title>
+  <title>INSTA SOSMED | FEED</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -51,24 +51,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             Selamat Datang, <?php echo session('first_name')." ".session('last_name')?>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-header">15 Notifications</span>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-envelope mr-2"></i> 4 new messages
-              <span class="float-right text-muted text-sm">3 mins</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-users mr-2"></i> 8 friend requests
-              <span class="float-right text-muted text-sm">12 hours</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-file mr-2"></i> 3 new reports
-              <span class="float-right text-muted text-sm">2 days</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+            <a href="<?php echo base_url('logout')?>" class="dropdown-item dropdown-footer">Logout</a>
           </div>
         </li>
       </ul>
@@ -115,14 +99,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="card-header">
                 <span class="username"><a href="#"><?php echo $value['first_name']." ".$value['last_name']?></a></span>
                 <br>
-                <span class="description">Shared publicly - 7:30 PM Today</span>
+                <span class="description">Posted On / <?php echo $value['created_at']?></span>
               </div>
               <div class="card-body">
                 <img class="img-thumbnail pad" src="<?php echo base_url()?>/post-upload/<?php echo $value['image']?>" alt="Photo">
 
                 <p><?php echo $value['post']?></p>
                 <!-- <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</button> -->
-                <button type="button" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
+                <?php if (in_array($value['id'],$post_id)) { ?>
+                <form action="<?php echo base_url('unlike')?>" method="post">
+                  <input type="hidden" name="post_id" value="<?php echo $value['id']?>">
+                  <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-thumbs-down"></i> Unlike</button>
+                </form>
+                <?php } else { ?>
+                <form action="<?php echo base_url('likes')?>" method="post">
+                  <input type="hidden" name="post_id" value="<?php echo $value['id']?>">
+                  <button type="submit" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
+                </form>
+                <?php } ?>
                 <span class="float-right text-muted">127 likes - 3 comments</span>
               </div>
               <div class="card-footer card-comments">

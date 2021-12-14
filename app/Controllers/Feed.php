@@ -11,8 +11,33 @@ class Feed extends BaseController
     public function index()
     {
         $feed = new FeedModel();
+        $like_post = $feed->getLikedPostByCurrentUser();
         $data['feed'] = $feed->getAllFeed();
+        $data['post_id'] = array();
+        foreach($like_post as $key => $value){
+            array_push($data['post_id'],$value['post_id']);
+        }
         return view('feed', $data);
+    }
+
+    public function storeLike()
+    {
+        $feed = new FeedModel();
+        $data_like = array(
+            'post_id' => $this->request->getPost('post_id'),
+            'userid' => session()->get('userid')
+        ); 
+        $feed->storeLike($data_like);
+        return redirect()->to(base_url('feed'));
+    }
+
+    public function removeLike()
+    {
+        $feed = new FeedModel();
+        $post_id = $this->request->getPost('post_id');
+        $userid = session()->get('userid');
+        $feed->removeLike($userid,$post_id);
+        return redirect()->to(base_url('feed'));
     }
 
     public function storePost()

@@ -36,8 +36,11 @@ $routes->get('login','Home::login');
 $routes->post('login','Home::prosesLogin');
 $routes->get('register','Home::register');
 $routes->post('register','Home::storeRegister');
+$routes->get('logout','Home::logout');
 $routes->get('feed','Feed::index');
 $routes->post('feed','Feed::storePost');
+$routes->post('likes','Feed::storeLike');
+$routes->post('unlike','Feed::removeLike');
 
 /*
  * --------------------------------------------------------------------

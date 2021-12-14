@@ -17,4 +17,25 @@ class FeedModel extends Model
         $query =  $this->db->query($sql);
         return $query->getResult('array');
     }
+
+    public function storeLike($data)
+    {
+        return $this->db->table('likes')->insert($data);
+    }
+
+    public function removeLike($userid,$post_id)
+    {
+        return $this->db->table('likes')->delete([
+            'userid' => $userid,
+            'post_id' => $post_id
+        ]);
+    }
+
+    public function getLikedPostByCurrentUser()
+    {
+        $sql = "SELECT post_id FROM likes where userid=".session()->get('userid');
+        $query = $this->db->query($sql);
+        return $query->getResult('array');
+    }
+
 }
