@@ -78,7 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="card-header">
                     <h4 class="card-title">Write Something</h4>
                 </div>
-                <form action="<?php echo base_url('feed')?>" method="post" enctype="multipart/form-data">
+                <form action="<?php echo base_url('member/feed')?>" method="post" enctype="multipart/form-data">
                   <div class="card-body">
                       <textarea name="post" class="form-control" id="" cols="30" rows="5"></textarea>
                       <br>
@@ -107,12 +107,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <p><?php echo $value['post']?></p>
                 <!-- <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</button> -->
                 <?php if (in_array($value['id'],$post_id)) { ?>
-                <form action="<?php echo base_url('unlike')?>" method="post">
+                <form action="<?php echo base_url('member/unlike')?>" method="post">
                   <input type="hidden" name="post_id" value="<?php echo $value['id']?>">
                   <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-thumbs-down"></i> Unlike</button>
                 </form>
                 <?php } else { ?>
-                <form action="<?php echo base_url('likes')?>" method="post">
+                <form action="<?php echo base_url('member/likes')?>" method="post">
                   <input type="hidden" name="post_id" value="<?php echo $value['id']?>">
                   <button type="submit" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
                 </form>
@@ -136,7 +136,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
               <!-- /.card-footer -->
               <div class="card-footer">
-                <form action="<?php echo base_url('comments')?>" method="post">
+                <form action="<?php echo base_url('member/comments')?>" method="post">
                   <div class="img-push">
                     <input type="hidden" name="post_id" id="post-id-comment" value="<?php echo $value['id']?>">
                     <input type="text" name="comment" class="form-control form-control-sm" placeholder="Enter your comment here">

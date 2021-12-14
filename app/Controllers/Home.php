@@ -40,8 +40,9 @@ class Home extends BaseController
                 session()->set('first_name',$cek_login['first_name']);
                 session()->set('last_name',$cek_login['last_name']);
                 session()->set('email',$cek_login['email']);
+                session()->set('logged_in',TRUE);
 
-                return redirect()->to(base_url('feed'));
+                return redirect()->to(base_url('member/feed'));
             }else {
                 session()->setFlashData('errors',[
                     ''=>'Password yang anda masukkan salah'

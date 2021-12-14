@@ -34,7 +34,7 @@ class Feed extends BaseController
             'userid' => session()->get('userid')
         ); 
         $feed->storeLike($data_like);
-        return redirect()->to(base_url('feed'));
+        return redirect()->to(base_url('member/feed'));
     }
 
     public function storeComment()
@@ -46,7 +46,7 @@ class Feed extends BaseController
             'comment' => strip_tags($this->request->getPost('comment'))
         );
         $feed->storeComment($data_comment);
-        return redirect()->to(base_url('feed'));
+        return redirect()->to(base_url('member/feed'));
     }
 
     public function removeLike()
@@ -55,7 +55,7 @@ class Feed extends BaseController
         $post_id = $this->request->getPost('post_id');
         $userid = session()->get('userid');
         $feed->removeLike($userid,$post_id);
-        return redirect()->to(base_url('feed'));
+        return redirect()->to(base_url('member/feed'));
     }
 
     public function storePost()
@@ -73,10 +73,10 @@ class Feed extends BaseController
             );
             $store_post = $feed->insert($post_data);
             session()->setFlashData('success','Post Successful');
-            return redirect()->to(base_url('feed'));
+            return redirect()->to(base_url('member/feed'));
         }else {
             session()->setFlashData('errors','Failed to post');
-            return redirect()->to(base_url('feed'));
+            return redirect()->to(base_url('member/feed'));
         }
     }
 }
